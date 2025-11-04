@@ -1,0 +1,7 @@
+- [ ] Examine current game.html and games.js files
+- [ ] Analyze existing Flappy Bird implementation
+- [ ] Improve Easy Mode: Consistent pillar gaps + detailed moving bubbles
+- [ ] Improve Medium Mode: Same pillar consistency + detailed vines on pillars
+- [ ] Improve Hard Mode: Same pillar consistency + detailed animated fire
+- [ ] Enhance All Modes: More detailed clouds + bigger, more bird-shaped flying birds
+- [ ] Test all difficulty levels

@@ -1,0 +1,6 @@
+- [ ] Examine current index.html structure and styling
+- [ ] Analyze text readability concerns
+- [ ] Update background to maroon (#7a0019)
+- [ ] Add gold accents (#ffcc33)
+- [ ] Ensure text contrast for readability
+- [ ] Test the styling changes

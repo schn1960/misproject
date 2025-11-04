@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Interests</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        body {
+            background-color: #7a0019;
+        }
+        
+        .career-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .career-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #ffcc33;
+            position: relative;
+        }
+
+        .career-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #ffcc33, transparent);
+            border-radius: 10px 10px 0 0;
+        }
+
+        h1 {
+            color: #ffcc33;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        h2 {
+            color: #7a0019;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #7a0019;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffcc33;
+            color: #7a0019;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .major-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .major-tab {
+            padding: 0.8rem 1.5rem;
+            background-color: #7a0019;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .major-tab:hover {
+            opacity: 0.9;
+        }
+
+        a {
+            color: #ffcc33;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+    <div class="container">
+        <main class="career-section">
+            <h1>Career Interests</h1>
+            
+            <div class="major-tabs">
+                <div class="major-tab">Major: Finance</div>
+                <div class="major-tab">Major: Accounting</div>
+            </div>
+
+            <div style="text-align: center;">
+                <img src="images/CareerFair.jpeg" alt="Career Fair" style="max-width: 600px; width: 100%; height: auto; border-radius: 10px; margin: 1rem auto; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="image-caption" style="font-style: italic;">Tanner Schneider at the career fair</p>
+            </div>
+
+            <div class="career-item">
+                <h2>Professional Goals</h2>
+                <p>As an aspiring accountant, I am pursuing a career in public accounting with a focus on audit and assurance services. My goal is to obtain my CPA license and work with a leading accounting firm where I can apply my strong analytical skills and attention to detail. Through my coursework at UMD's Labovitz School of Business and Economics, I have developed a solid foundation in accounting principles and am eager to contribute to a firm's success while growing professionally.</p>
+            </div>
+
+            <div class="career-item">
+                <h2>Skills & Expertise</h2>
+                <p>• Strong foundation in financial accounting and reporting principles<br>
+                • Proficient in Microsoft Excel and accounting software<br>
+                • Experience with data analysis and financial modeling<br>
+                • Detail-oriented with strong analytical and problem-solving abilities<br>
+                • Excellent communication and teamwork skills<br>
+                • Knowledge of GAAP and current accounting standards</p>
+            </div>
+
+            <div class="career-item">
+                <h2>Industry Focus</h2>
+                <p>Currently focused on public accounting, particularly in the areas of audit and assurance services. Interested in working with diverse clients across various industries to gain broad exposure to different accounting challenges and business environments. Long-term goal includes specializing in technical accounting matters and potentially moving into a leadership role within an accounting firm.</p>
+            </div>
+
+            <div class="career-item">
+                <h2>Walser Automotive</h2>
+                <img src="images/Walser.jpg" alt="Walser Automotive" style="max-width: 100%; height: auto; border-radius: 10px; margin: 1.5rem 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p>A company i would be interested in working for is Walser Automotive. This is a Automotive company that has many dealerships and customer service jobs. I am interested in the accounting portion of their buisness and getting real world experience from it. I have applied to their internship program and met with them through the career fair. I beileve I qualify for the postion as I have work as a student consultant at Luther Automotive hich is a company in the same field. I was able to connect them through a personal employees buisness card and at their website <a href="https://walsercareers.com" target="_blank">https://walsercareers.com</a>.</p>
+            </div>
+
+            <div class="career-item">
+                <h2>Boulay</h2>
+                <img src="images/Boulay.jpeg" alt="Boulay" style="max-width: 100%; height: auto; border-radius: 10px; margin: 1.5rem 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p>Boulay Group is an accountanting group that is nationwide. I met with them through UMD's Accounting club as they were a guest speaker. I emailed the Hiring manager i met and filled out a application at <a href="https://boulaygroup.com" target="_blank">https://boulaygroup.com</a>. I am interested in Boulay as they have many great internships and they are located where I live. I think I am qualified as I am working towards a Accounting degree and have great professional and communitcation skills.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

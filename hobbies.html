@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobbies and Interests</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        body {
+            background-color: #7a0019;
+        }
+        
+        .hobby-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hobby-item {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #ffcc33;
+            position: relative;
+        }
+
+        .hobby-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #ffcc33, transparent);
+            border-radius: 10px 10px 0 0;
+        }
+        
+        h1 {
+            color: #ffcc33;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hobby-caption {
+            color: #7a0019;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .hobby-description {
+            color: #7a0019;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0.5rem auto 2rem;
+            max-width: 600px;
+            padding: 0 1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffcc33;
+            color: #7a0019;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+    <div class="container">
+        <main class="hobby-section">
+            <h1>Hobbies and Interests</h1>
+            
+            <div class="hobby-item">
+                <img src="images/GolfSwing.jpeg" alt="Golfing" style="max-width: 600px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 1rem 0;">
+                <p class="hobby-caption">Enjoys Golf</p>
+                <p class="hobby-description">I love being outdoors and I love to golf. I find golf very relaxing, competitve, and fun. At my best I was right around a 15 Handicap.</p>
+            </div>
+
+            <div class="hobby-item">
+                <img src="images/LLouise.jpeg" alt="Traveling" style="max-width: 600px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 1rem 0;">
+                <p class="hobby-caption">Loves to Travel</p>
+                <p class="hobby-description">I love to travel and see beautiful new places. My favorite trips of places ive been to are Banff Canda, Punta Cana DR, and Hawaii. I cant wait to keep going of fun trips.</p>
+            </div>
+
+            <div class="hobby-item">
+                <img src="images/Hockey.jpg" alt="Hockey" style="max-width: 600px; height: auto; display: block; margin: 0 auto;">
+                <p class="hobby-caption">Plays Hockey</p>
+                <p class="hobby-description">I have played hockey my whole life and I was Captian of my team at Minnetonka Highschool. I love to be on the ice. The team aspect, the speed, and the hardwork all add to my love of the sport.</p>
+            </div>
+
+            <h2 style="color: #ffcc33; margin-top: 3rem; font-size: 2rem; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);">Image Gallery</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem auto; max-width: 800px;">
+                <img src="images/WakeSurf.jpeg" alt="Wake Surfing" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+                <img src="images/Triflex.jpeg" alt="Triflex" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+                <img src="images/Skating.jpeg" alt="Skating" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+                <img src="images/Hiking.jpeg" alt="Hiking" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .hobby-section img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</body>
+</html>

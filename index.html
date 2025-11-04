@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanners Webpage</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        :root {
+            --primary-color: #7a0019;
+            --secondary-color: #ffcc33;
+            --darker-primary: #7a0019;
+            --background: #7a0019;
+            --text-color: #ffffff;
+            --accent-color: #ffcc33;
+            --card-background: rgba(255, 255, 255, 0.98);
+            --text-primary: #333333;
+            --text-light: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .welcome-card {
+            background: var(--card-background);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(122, 0, 25, 0.2);
+            border: 2px solid var(--secondary-color);
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .welcome-card h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .welcome-card p {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .interactive-button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 204, 51, 0.3);
+        }
+
+        .interactive-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 204, 51, 0.5);
+            background: #ffd84d;
+        }
+
+        .interactive-button:active {
+            transform: translateY(0);
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            opacity: 0.1;
+            animation: float 20s infinite;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(100px, 100px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 2rem;
+            }
+
+            .welcome-card h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #1a1a1a;
+                --text-color: #ffffff;
+            }
+
+            .welcome-card {
+                background: rgba(30, 30, 30, 0.95);
+            }
+
+            .welcome-card p {
+                color: #bbb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="welcome-card">
+            <h1>Welcome</h1>
+            <div style="display: flex; flex-direction: column; align-items: center; max-width: 1200px; margin: 0 auto;">
+                <img src="images/MaroonSenPic.JPG" alt="Tanner Senior Picture" style="width: 400px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <p style="color: var(--secondary-color); margin: 1.5rem 0; font-size: 1.5rem; font-weight: bold; text-align: center;">Tanner's Personal Webpage</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin: 2rem 0;">
+                    <img src="images/GolfBanff.jpg" alt="Golfing in Banff" style="width: 600px; height: 400px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                    <img src="images/Skating.jpeg" alt="Skating" style="width: 600px; height: 400px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                </div>
+                
+                <p style="color: var(--secondary-color); margin: 2rem 0; font-size: 1.1rem; line-height: 1.6; text-align: center; max-width: 800px;">
+                    Hi I am Tanner Schneider. I am a hard working student at The University of Minnesota Duluth with a active personality. I am from Chanhassen Minnesota. I play hockey and love to golf. If I had a day off I would choose to spend it outdoors in good weather. I like to be around friends and I love to enjoy good food.
+                </p>
+
+                <div style="display: flex; flex-wrap: nowrap; gap: 0.5rem; justify-content: center; margin-top: 2rem; overflow-x: auto; padding: 0 1rem;">
+                    <a href="resume.html" class="interactive-button" style="background: var(--darker-primary); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0;">Resume</a>
+                    <a href="hobbies.html" class="interactive-button" style="background: var(--darker-primary); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0;">Hobbies & Interests</a>
+                    <a href="discover.html" class="interactive-button" style="background: var(--darker-primary); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0;">Discover UMD</a>
+                    <a href="career.html" class="interactive-button" style="background: var(--darker-primary); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0;">Career Interests</a>
+                    <a href="game.html" class="interactive-button" style="background: var(--darker-primary); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0;">Play Game</a>
+                </div>
+
+                <div style="margin-top: 3rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <h2 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center; font-size: 2rem;">Welcome Video</h2>
+                    <div style="width: 100%; max-width: 800px; display: flex; justify-content: center;">
+                        <video width="100%" controls style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                            <source src="videos/Welcome.MOV" type="video/quicktime">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
