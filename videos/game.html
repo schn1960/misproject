@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Game</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        body {
+            background-color: #7a0019;
+        }
+
+        .game-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #game-container {
+            width: 600px;
+            height: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #1E90FF, #87CEEB, #E0F6FF);
+            border-radius: 10px;
+            border: 8px solid #ffcc33;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes float {
+            0% { transform: translateX(400px); }
+            100% { transform: translateX(-100px); }
+        }
+
+        @keyframes circularFlight {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(90deg); }
+            50% { transform: translate(200px, 0) rotate(180deg); }
+            75% { transform: translate(100px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* Enhanced background birds - bigger and more bird-shaped */
+        .background-bird {
+            position: absolute;
+            width: 35px;
+            height: 20px;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            border-radius: 50% 50% 45% 45%;
+            z-index: 0;
+            animation: circularFlight 8s infinite linear;
+        }
+
+        .background-bird::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #8B4513;
+            border-radius: 50%;
+            top: 4px;
+            left: -5px;
+        }
+
+        .background-bird::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 50% 0 50% 0;
+            top: 9px;
+            left: -8px;
+            transform: rotate(15deg);
+        }
+
+        /* Enhanced detailed clouds */
+        .cloud {
+            position: absolute;
+            width: 90px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            animation: float 15s linear infinite;
+            z-index: 0;
+            box-shadow: 
+                5px 3px 10px rgba(0,0,0,0.1),
+                inset -2px -2px 5px rgba(200,200,200,0.3);
+        }
+
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 
+                2px 1px 8px rgba(0,0,0,0.1),
+                inset -1px -1px 3px rgba(200,200,200,0.3);
+        }
+
+        .cloud::before {
+            width: 45px;
+            height: 45px;
+            top: -25px;
+            left: 20px;
+        }
+
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            top: -20px;
+            left: 45px;
+            box-shadow: 
+                1px 1px 6px rgba(0,0,0,0.1),
+                inset -1px -1px 3px rgba(200,200,200,0.3);
+        }
+
+        #bird {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 50px;
+            transition: transform 0.1s;
+            background-color: #ffcc33;
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        #bird::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            top: 8px;
+            right: 8px;
+            box-shadow: inset 0 0 0 4px #000;
+        }
+
+        #bird::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff6b6b;
+            border-radius: 50% 50% 0 0;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pipe {
+            width: 60px;
+            position: absolute;
+            background: #7a0019;
+            z-index: 2;
+        }
+
+        .difficulty-buttons {
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .difficulty-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #000000;
+            color: #ffcc33;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .difficulty-btn.active {
+            background: #ffcc33;
+            color: #000000;
+            box-shadow: 0 4px 8px rgba(255, 204, 51, 0.3);
+        }
+
+        #score-display {
+            font-size: 2rem;
+            color: #ffcc33;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffcc33;
+            color: #7a0019;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ffcc33;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .game-instructions {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            color: #7a0019;
+        }
+
+        #start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 3;
+        }
+
+        #celebration-screen {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: celebrate 0.5s ease-in-out;
+        }
+
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .celebration-text {
+            font-size: 2rem;
+            color: #7a0019;
+            margin-bottom: 1rem;
+        }
+
+        .final-score {
+            font-size: 3rem;
+            color: #ffcc33;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 1rem 0;
+        }
+
+        .credit {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            text-align: center;
+            color: #7a0019;
+            font-style: italic;
+        }
+
+        /* Enhanced difficulty-specific effects */
+        .enhanced-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(173,216,230,0.6));
+            box-shadow: 
+                inset -2px -2px 4px rgba(100,149,237,0.3),
+                0 0 10px rgba(173,216,230,0.4);
+            animation: bubbleFloat 3s ease-in-out infinite;
+        }
+
+        .enhanced-vine {
+            position: absolute;
+            background: linear-gradient(180deg, #228B22, #006400);
+            border-radius: 3px;
+            box-shadow: 
+                inset -1px -1px 2px rgba(0,100,0,0.4),
+                0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .enhanced-vine::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #32CD32;
+            border-radius: 50%;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 
+                0 2px 4px rgba(0,0,0,0.2),
+                inset -1px -1px 2px rgba(0,100,0,0.3);
+        }
+
+        .enhanced-fire {
+            position: absolute;
+            background: linear-gradient(45deg, #FF4500, #FF6347, #FFD700);
+            border-radius: 10px;
+            animation: fireFlicker 0.3s ease-in-out infinite alternate;
+            box-shadow: 
+                0 0 15px rgba(255,69,0,0.6),
+                inset 0 0 10px rgba(255,215,0,0.4);
+        }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        @keyframes fireFlicker {
+            0% { 
+                opacity: 0.8;
+                transform: scaleY(1) rotate(1deg);
+                filter: hue-rotate(0deg);
+            }
+            100% { 
+                opacity: 1;
+                transform: scaleY(1.1) rotate(-1deg);
+                filter: hue-rotate(10deg);
+            }
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .audio-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 204, 51, 0.9);
+            color: #7a0019;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.1);
+            background: #ffcc33;
+        }
+
+        .audio-btn.muted {
+            background: rgba(122, 0, 25, 0.8);
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+    <div class="game-section">
+        <h1>Flappy Bird</h1>
+        
+        <div class="game-instructions">
+            <p>How to Play: Click or press SPACE to make the bird fly. Avoid the pipes and try to get through as many as you can!</p>
+            <p>Choose your difficulty below - harder levels make the bird move faster!</p>
+        </div>
+
+        <div class="difficulty-buttons">
+            <button class="difficulty-btn active" data-speed="2">Easy</button>
+            <button class="difficulty-btn" data-speed="3.5">Medium</button>
+            <button class="difficulty-btn" data-speed="5">Hard</button>
+        </div>
+
+        <div id="score-display">Score: 0</div>
+        
+        <div id="game-container">
+            <!-- Enhanced detailed clouds -->
+            <div class="cloud" style="top: 50px; animation-delay: -3s;"></div>
+            <div class="cloud" style="top: 150px; animation-delay: -8s;"></div>
+            <div class="cloud" style="top: 250px; animation-delay: -13s;"></div>
+            <div class="cloud" style="top: 350px; animation-delay: -18s;"></div>
+            <div class="cloud" style="top: 450px; animation-delay: -23s;"></div>
+            
+            <!-- Enhanced background birds -->
+            <div class="background-bird" style="top: 100px; left: 100px; animation: circularFlight 8s infinite linear;"></div>
+            <div class="background-bird" style="top: 200px; left: 300px; animation: circularFlight 8s infinite linear reverse; animation-delay: -4s;"></div>
+            <div class="background-bird" style="top: 400px; left: 200px; animation: circularFlight 8s infinite linear; animation-delay: -2s;"></div>
+            <div class="background-bird" style="top: 300px; left: 400px; animation: circularFlight 8s infinite linear reverse; animation-delay: -6s;"></div>
+            <div class="background-bird" style="top: 500px; left: 150px; animation: circularFlight 8s infinite linear; animation-delay: -1s;"></div>
+            
+            <div id="bird"></div>
+            <div id="start-screen">
+                <h2>Flappy Bird</h2>
+                <p>Click or press Space to start</p>
+                <p>Avoid the obstacles and collect points!</p>
+            </div>
+            <div id="celebration-screen">
+                <div class="celebration-text">🎉 Congratulations! 🎉</div>
+                <div class="final-score"></div>
+                <p>Well done! Can you beat your score?</p>
+                <button class="difficulty-btn" onclick="initGame()">Play Again</button>
+            </div>
+            
+            <!-- Audio Controls -->
+            <div class="audio-controls">
+                <button class="audio-btn" id="music-btn" title="Toggle Music">🎵</button>
+                <button class="audio-btn" id="sound-btn" title="Toggle Sound Effects">🔊</button>
+            </div>
+        </div>
+        <div class="credit">
+            <p>Made by MIS collaboration group 11</p>
+        </div>
+    </div>
+
+    <script>
+        // Audio Manager Class
+        class AudioManager {
+            constructor() {
+                this.audioContext = null;
+                this.masterVolume = 0.3;
+                this.musicVolume = 0.2;
+                this.sfxVolume = 0.5;
+                this.musicEnabled = true;
+                this.sfxEnabled = true;
+                this.currentMusicOscillator = null;
+                this.musicGainNode = null;
+                this.initAudio();
+            }
+
+            async initAudio() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    console.warn('Web Audio API not supported');
+                }
+            }
+
+            async resumeAudioContext() {
+                if (this.audioContext && this.audioContext.state === 'suspended') {
+                    await this.audioContext.resume();
+                }
+            }
+
+            createOscillator(frequency, type = 'sine', duration = 0.2, volume = 0.3) {
+                if (!this.audioContext) return null;
+
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+                oscillator.type = type;
+
+                gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(volume * this.masterVolume * this.sfxVolume, this.audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
+
+                return { oscillator, gainNode, duration };
+            }
+
+            playXylophoneNote(frequency, duration = 0.3, delay = 0) {
+                if (!this.musicEnabled) return;
+
+                setTimeout(() => {
+                    const { oscillator, gainNode, duration: actualDuration } = this.createOscillator(frequency, 'sine', duration, 0.4);
+                    if (oscillator) {
+                        oscillator.start();
+                        oscillator.stop(this.audioContext.currentTime + actualDuration);
+                    }
+                }, delay);
+            }
+
+            playXylophoneMusic() {
+                if (!this.musicEnabled || !this.audioContext) return;
+
+                // Simple xylophone melody - a pleasant, repetitive tune
+                const melody = [
+                    { freq: 523.25, delay: 0 },      // C5
+                    { freq: 659.25, delay: 400 },   // E5
+                    { freq: 783.99, delay: 800 },   // G5
+                    { freq: 1046.50, delay: 1200 }, // C6
+                    { freq: 783.99, delay: 1600 },  // G5
+                    { freq: 659.25, delay: 2000 },  // E5
+                    { freq: 523.25, delay: 2400 },  // C5
+                    { freq: 392.00, delay: 2800 },  // G4
+                    { freq: 523.25, delay: 3200 },  // C5
+                ];
+
+                melody.forEach(note => {
+                    this.playXylophoneNote(note.freq, 0.25, note.delay);
+                });
+
+                // Repeat the melody
+                setTimeout(() => {
+                    this.playXylophoneMusic();
+                }, 3600);
+            }
+
+            playSwoopSound() {
+                if (!this.sfxEnabled || !this.audioContext) return;
+
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+
+                oscillator.type = 'sine';
+                
+                // Create swooping effect by changing frequency over time
+                oscillator.frequency.setValueAtTime(200, this.audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(600, this.audioContext.currentTime + 0.1);
+                oscillator.frequency.exponentialRampToValueAtTime(300, this.audioContext.currentTime + 0.3);
+
+                gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.3 * this.masterVolume * this.sfxVolume, this.audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.3);
+
+                oscillator.start();
+                oscillator.stop(this.audioContext.currentTime + 0.3);
+            }
+
+            playCoinSound() {
+                if (!this.sfxEnabled || !this.audioContext) return;
+
+                // Mario-style coin sound - quick ascending notes
+                const notes = [
+                    { freq: 800, duration: 0.05 },
+                    { freq: 1000, duration: 0.05 },
+                    { freq: 1200, duration: 0.1 }
+                ];
+
+                let delay = 0;
+                notes.forEach(note => {
+                    setTimeout(() => {
+                        const { oscillator, gainNode, duration } = this.createOscillator(note.freq, 'square', note.duration, 0.3);
+                        if (oscillator) {
+                            oscillator.start();
+                            oscillator.stop(this.audioContext.currentTime + duration);
+                        }
+                    }, delay * 1000);
+                    delay += note.duration;
+                });
+            }
+
+            toggleMusic() {
+                this.musicEnabled = !this.musicEnabled;
+                if (this.musicEnabled) {
+                    this.playXylophoneMusic();
+                }
+                return this.musicEnabled;
+            }
+
+            toggleSFX() {
+                this.sfxEnabled = !this.sfxEnabled;
+                return this.sfxEnabled;
+            }
+        }
+
+        // Initialize audio manager
+        const audioManager = new AudioManager();
+
+        const gameContainer = document.getElementById('game-container');
+        const bird = document.getElementById('bird');
+        const scoreDisplay = document.getElementById('score-display');
+        const startScreen = document.getElementById('start-screen');
+        let gameSpeed = 2;
+        let score = 0;
+        let gameLoop;
+        let pipes = [];
+        let isGameRunning = false;
+        let birdY = 300;
+        let velocity = 0;
+        const gravity = 0.5;
+        const jumpStrength = -8;
+
+        function updateGameSpeed(speed) {
+            gameSpeed = speed * 0.8; // Reduced speed for easier gameplay
+            
+            document.querySelectorAll('.cloud').forEach(cloud => {
+                cloud.style.animationDuration = (20 - speed * 3) + 's';
+            });
+
+            document.querySelectorAll('.background-bird').forEach(bird => {
+                bird.style.animationDuration = (12 - speed * 2) + 's';
+            });
+        }
+
+        function resetGame() {
+            birdY = 300;
+            velocity = 0;
+            score = 0;
+            pipes = [];
+            scoreDisplay.textContent = `Score: ${score}`;
+            bird.style.top = `${birdY}px`;
+            
+            document.querySelectorAll('.pipe').forEach(pipe => pipe.remove());
+        }
+
+        function initGame() {
+            birdY = 300;
+            velocity = 0;
+            score = 0;
+            pipes = [];
+            scoreDisplay.textContent = `Score: ${score}`;
+            bird.style.top = `${birdY}px`;
+            startScreen.style.display = 'block';
+            document.getElementById('celebration-screen').style.display = 'none';
+            isGameRunning = false;
+            clearInterval(gameLoop);
+            
+            document.querySelectorAll('.pipe').forEach(pipe => pipe.remove());
+            
+            // Start background music when showing start screen
+            if (audioManager.musicEnabled) {
+                audioManager.playXylophoneMusic();
+            }
+        }
+
+        function startGame() {
+            if (isGameRunning) return;
+            
+            resetGame();
+            startScreen.style.display = 'none';
+            isGameRunning = true;
+            gameLoop = setInterval(updateGame, 20);
+            
+            // Create initial pipes
+            createPipe();
+            setTimeout(createPipe, 2000);
+            setTimeout(createPipe, 4000);
+        }
+
+        function updateGame() {
+            velocity += gravity;
+            birdY += velocity;
+            bird.style.top = `${birdY}px`;
+            bird.style.transform = `rotate(${velocity * 3}deg)`;
+
+            if (birdY < 0 || birdY > 560) {
+                gameOver();
+                return;
+            }
+
+            pipes.forEach((pipe, index) => {
+                const pipeLeft = parseInt(pipe.style.left);
+                pipe.style.left = `${pipeLeft - gameSpeed}px`;
+
+                if (checkCollision(pipe)) {
+                    gameOver();
+                    return;
+                }
+
+                if (pipeLeft <= 48 && !pipe.scored) {
+                    pipe.scored = true;
+                    score++;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                    
+                    // Play coin sound when scoring
+                    audioManager.playCoinSound();
+                }
+
+                if (pipeLeft < -60) {
+                    pipe.remove();
+                    pipes.splice(index, 1);
+                }
+            });
+
+            if (pipes.length < 3) {
+                createPipe();
+            }
+        }
+
+        let difficulty = 'easy';
+
+        function createPipe() {
+            // Consistent gap calculation based on difficulty
+            let gap;
+            if (difficulty === 'easy') {
+                gap = 280; // Larger gap for easy mode
+            } else if (difficulty === 'medium') {
+                gap = 240; // Medium gap
+            } else {
+                gap = 200; // Smaller gap for hard mode
+            }
+            
+            const pipeTop = document.createElement('div');
+            const pipeBottom = document.createElement('div');
+            
+            // More consistent pillar positioning - reduced randomization range
+            let randomHeight;
+            if (difficulty === 'easy') {
+                randomHeight = Math.floor(Math.random() * 100) + 150; // More centered range
+            } else if (difficulty === 'medium') {
+                randomHeight = Math.floor(Math.random() * 120) + 120; // Medium range
+            } else {
+                randomHeight = Math.floor(Math.random() * 140) + 100; // Wider range for hard
+            }
+
+            pipeTop.className = 'pipe';
+            pipeBottom.className = 'pipe';
+
+            // Enhanced special effects based on difficulty
+            if (difficulty === 'easy') {
+                // Enhanced detailed moving bubbles
+                const bubbleCount = 8;
+                for (let i = 0; i < bubbleCount; i++) {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'enhanced-bubble';
+                    bubble.style.width = `${15 + Math.random() * 15}px`;
+                    bubble.style.height = bubble.style.width;
+                    bubble.style.left = `${Math.random() * 45}px`;
+                    bubble.style.top = `${Math.random() * 40}px`;
+                    bubble.style.animationDelay = `${Math.random() * 2}s`;
+                    bubble.style.animationDuration = `${2.5 + Math.random() * 2}s`;
+                    pipeTop.appendChild(bubble.cloneNode());
+                    pipeBottom.appendChild(bubble.cloneNode());
+                }
+            } else if (difficulty === 'medium') {
+                // Enhanced detailed vines covering the pillars
+                const vineCount = 6;
+                for (let i = 0; i < vineCount; i++) {
+                    const vine = document.createElement('div');
+                    vine.className = 'enhanced-vine';
+                    vine.style.width = '6px';
+                    vine.style.height = `${30 + Math.random() * 50}px`;
+                    vine.style.left = `${8 + (i * 10)}px`;
+                    vine.style.top = `${Math.random() * 20}px`;
+                    vine.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+                    pipeTop.appendChild(vine.cloneNode());
+                    pipeBottom.appendChild(vine.cloneNode());
+                }
+                
+                // Add more vines around the pillar edges
+                for (let i = 0; i < 4; i++) {
+                    const sideVine = document.createElement('div');
+                    sideVine.className = 'enhanced-vine';
+                    sideVine.style.width = '4px';
+                    sideVine.style.height = `${40 + Math.random() * 30}px`;
+                    sideVine.style.left = i < 2 ? '2px' : '52px';
+                    sideVine.style.top = `${Math.random() * 30}px`;
+                    sideVine.style.transform = `rotate(${i < 2 ? -15 : 15}deg)`;
+                    pipeTop.appendChild(sideVine.cloneNode());
+                    pipeBottom.appendChild(sideVine.cloneNode());
+                }
+            } else if (difficulty === 'hard') {
+                // Enhanced detailed animated fire
+                const fireRows = 3;
+                for (let row = 0; row < fireRows; row++) {
+                    const fire = document.createElement('div');
+                    fire.className = 'enhanced-fire';
+                    fire.style.width = '100%';
+                    fire.style.height = `${15 + Math.random() * 10}px`;
+                    fire.style.top = `${row * 20}px`;
+                    fire.style.animationDelay = `${row * 0.1}s`;
+                    pipeTop.appendChild(fire.cloneNode());
+                    pipeBottom.appendChild(fire.cloneNode());
+                }
+                
+                // Add smaller fire details
+                for (let i = 0; i < 4; i++) {
+                    const smallFire = document.createElement('div');
+                    smallFire.className = 'enhanced-fire';
+                    smallFire.style.width = `${20 + Math.random() * 20}px`;
+                    smallFire.style.height = '8px';
+                    smallFire.style.left = `${Math.random() * 35}px`;
+                    smallFire.style.top = `${Math.random() * 25}px`;
+                    smallFire.style.animationDelay = `${Math.random() * 0.5}s`;
+                    pipeTop.appendChild(smallFire.cloneNode());
+                    pipeBottom.appendChild(smallFire.cloneNode());
+                }
+            }
+
+            pipeTop.style.height = `${randomHeight}px`;
+            pipeTop.style.top = '0';
+            pipeTop.style.left = '600px';
+
+            pipeBottom.style.height = `${800 - randomHeight - gap}px`;
+            pipeBottom.style.bottom = '0';
+            pipeBottom.style.left = '600px';
+
+            gameContainer.appendChild(pipeTop);
+            gameContainer.appendChild(pipeBottom);
+            pipes.push(pipeTop, pipeBottom);
+        }
+
+        function checkCollision(pipe) {
+            const birdRect = bird.getBoundingClientRect();
+            const pipeRect = pipe.getBoundingClientRect();
+
+            return !(birdRect.right < pipeRect.left || 
+                    birdRect.left > pipeRect.right || 
+                    birdRect.bottom < pipeRect.top || 
+                    birdRect.top > pipeRect.bottom);
+        }
+
+        function jump() {
+            if (!isGameRunning) {
+                startGame();
+            }
+            velocity = jumpStrength;
+            
+            // Play swoop sound when bird jumps
+            audioManager.playSwoopSound();
+        }
+
+        function gameOver() {
+            isGameRunning = false;
+            clearInterval(gameLoop);
+            const celebrationScreen = document.getElementById('celebration-screen');
+            celebrationScreen.querySelector('.final-score').textContent = `Score: ${score}`;
+            celebrationScreen.style.display = 'block';
+        }
+
+        // Audio control buttons
+        document.getElementById('music-btn').addEventListener('click', async () => {
+            await audioManager.resumeAudioContext();
+            const isEnabled = audioManager.toggleMusic();
+            const btn = document.getElementById('music-btn');
+            btn.textContent = isEnabled ? '🎵' : '🔇';
+            btn.classList.toggle('muted', !isEnabled);
+        });
+
+        document.getElementById('sound-btn').addEventListener('click', async () => {
+            await audioManager.resumeAudioContext();
+            const isEnabled = audioManager.toggleSFX();
+            const btn = document.getElementById('sound-btn');
+            btn.textContent = isEnabled ? '🔊' : '🔇';
+            btn.classList.toggle('muted', !isEnabled);
+        });
+
+        document.addEventListener('keydown', async (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                await audioManager.resumeAudioContext();
+                jump();
+            }
+        });
+
+        gameContainer.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await audioManager.resumeAudioContext();
+            jump();
+        });
+
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.difficulty-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const speed = parseFloat(btn.dataset.speed);
+                updateGameSpeed(speed);
+                // Set difficulty based on speed
+                if (speed === 2) difficulty = 'easy';
+                else if (speed === 3.5) difficulty = 'medium';
+                else difficulty = 'hard';
+                initGame();
+            });
+        });
+
+        // Start the game
+        initGame();
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover UMD</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        body {
+            background-color: #7a0019;
+        }
+        
+        .discover-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .umd-feature {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #ffcc33;
+            position: relative;
+        }
+
+        .umd-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #ffcc33, transparent);
+            border-radius: 10px 10px 0 0;
+        }
+
+        h1 {
+            color: #ffcc33;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        h2 {
+            color: #7a0019;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #7a0019;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffcc33;
+            color: #7a0019;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+    <div class="container">
+        <main class="discover-section">
+            <h1>Discover UMD</h1>
+            
+            <div class="umd-feature">
+                <h2>Why UMD?</h2>
+                <p>The University of Minnesota Duluth offers a perfect blend of quality education, stunning location, and vibrant campus life. With its scenic location overlooking Lake Superior, UMD provides students with an exceptional learning environment that combines academic excellence with natural beauty. The university's commitment to student success, research opportunities, and community engagement makes it an ideal choice for ambitious students.</p>
+                <img src="images/UMDCampus.jpg" alt="UMD Campus" style="max-width: 100%; margin: 1rem 0; border-radius: 8px;">
+                <p class="image-caption" style="font-style: italic; margin-bottom: 1rem;">University of Minnesota Duluth Campus</p>
+                <img src="images/UMDHockey.jpeg" alt="UMD Hockey" style="max-width: 100%; margin: 1rem 0; border-radius: 8px;">
+                <p class="image-caption" style="font-style: italic;">School Spirit at events</p>
+            </div>
+            
+            <div class="umd-feature">
+                <h2>Campus Life</h2>
+                <p>UMD's campus life is rich with opportunities for personal growth and community involvement. From the state-of-the-art Kathryn A. Martin Library to the recently renovated Sports and Health Center, students have access to modern facilities that enhance their educational experience. The campus hosts numerous student organizations, cultural events, and recreational activities throughout the year, fostering a strong sense of community and school spirit.</p>
+                <p>Students can enjoy a vibrant social atmosphere with over 250 student organizations, Division I athletics, and countless opportunities for outdoor recreation along the beautiful North Shore of Lake Superior. The campus features modern residence halls, dining facilities, and gathering spaces that create a welcoming environment for both studying and socializing.</p>
+            </div>
+
+            <div class="umd-feature">
+                <h2>Labovitz School of Business and Economics (LSBE)</h2>
+                <img src="images/lsbe.jpeg" alt="LSBE Building" style="width: 100%; height: auto; border-radius: 10px; margin: 1rem 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <p>The Labovitz School of Business and Economics (LSBE) is a premier business school accredited by AACSB International. Located in a state-of-the-art facility, LSBE offers comprehensive programs in business administration, accounting, finance, marketing, and management information systems. The school's focus on experiential learning, professional development, and real-world applications prepares students for successful careers in the global business environment. With strong connections to the business community and dedicated faculty, LSBE provides students with the knowledge, skills, and opportunities needed to excel in their chosen fields.</p>
+            </div>
+
+            <div class="umd-feature">
+                <h2>Bagley Nature Area</h2>
+                <img src="images/bagley.jpeg" alt="Bagley Nature Area" style="width: 100%; height: auto; border-radius: 10px; margin: 1rem 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <p>The Bagley Nature Area is a stunning 55-acre outdoor classroom and recreational space on the UMD campus. This natural sanctuary features hiking trails, cross-country skiing paths, and diverse ecosystems including woodlands, wetlands, and Rock Pond. It serves as a living laboratory for environmental education and research, while also providing students with a peaceful retreat for outdoor activities, exercise, or simply connecting with nature. Throughout the seasons, Bagley offers unique opportunities for outdoor recreation, environmental studies, and a peaceful escape from campus life.</p>
+            </div>
+
+            <div class="umd-feature">
+                <h2>Kathryn A. Martin Library</h2>
+                <img src="images/Lib.jpg" alt="UMD Library" style="width: 100%; height: auto; border-radius: 10px; margin: 1rem 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <p>The Kathryn A. Martin Library is the intellectual heart of UMD's campus. This modern facility offers extensive research resources, collaborative study spaces, and cutting-edge technology to support student learning and academic success. The library houses over 240,000 books, provides access to numerous digital databases, and features comfortable study areas, group meeting rooms, and computer labs. With knowledgeable librarians, writing center services, and multimedia resources, the library serves as a comprehensive learning commons that supports students' academic journey at UMD.</p>
+            </div>
+
+            <div class="umd-feature" id="student-testimonials">
+                <h2>Student Experiences</h2>
+                <p>Hear directly from UMD students about their experiences on campus:</p>
+                
+                <!-- Top row for landscape videos -->
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; margin-bottom: 3rem;">
+                    <!-- Video 1 -->
+                    <div class="video-container" style="width: 400px;">
+                        <video width="100%" controls style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <source src="videos/Medho.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p style="text-align: center; margin-top: 0.5rem; color: #7a0019; font-weight: bold;">Medho's Story</p>
+                    </div>
+                    <!-- Video 2 -->
+                    <div class="video-container" style="width: 400px;">
+                        <video width="100%" controls style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <source src="videos/TSWHY.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p style="text-align: center; margin-top: 0.5rem; color: #7a0019; font-weight: bold;">Tanner's Story</p>
+                    </div>
+                </div>
+
+                <!-- Bottom row for portrait videos -->
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                    <!-- Video 3 -->
+                    <div class="video-container" style="width: 250px;">
+                        <video width="100%" controls style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <source src="videos/Ben.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p style="text-align: center; margin-top: 0.5rem; color: #7a0019; font-weight: bold;">Ben's Story</p>
+                    </div>
+                    <!-- Video 4 -->
+                    <div class="video-container" style="width: 250px;">
+                        <video width="100%" controls style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <source src="videos/Bryce.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p style="text-align: center; margin-top: 0.5rem; color: #7a0019; font-weight: bold;">Bryce's Story</p>
+                    </div>
+                    <!-- Video 5 -->
+                    <div class="video-container" style="width: 250px;">
+                        <video width="100%" controls style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <source src="videos/Wesley.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p style="text-align: center; margin-top: 0.5rem; color: #7a0019; font-weight: bold;">Wesley's Story</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
